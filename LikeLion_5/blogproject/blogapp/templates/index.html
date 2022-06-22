@@ -1,0 +1,12 @@
+<h1>My Simple blog</h1>
+<!-- 이 공간에는 블로그글 보여줄 예정-->
+
+{% for post in posts %}
+<h3>{{ post.title }}</h3>
+{{ post.date }} {% endfor %}
+
+<a href="{% url 'new' %}">HYML을 이용한 새 글 작성</a><br />
+
+<a href="{% url 'formcreate' %}">django form 을 이용한 새 글 작성</a> <br />
+
+<a href="{% url 'modelformcreate' %}">django model form 을 이용한 새 글 작성</a>
