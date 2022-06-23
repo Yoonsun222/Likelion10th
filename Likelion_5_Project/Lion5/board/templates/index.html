@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Likelion5</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/bootstrap.min.css' %}"
+    />
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Likelion5</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor02"
+          aria-controls="navbarColor02"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Board </a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-sm-2"
+              type="text"
+              placeholder="Search"
+            />
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </head>
+  <body>
+    <br/>
+    <a style="color:gray; font-weight: bold; float:right; margin-right: 20px;" href="{% url 'new' %}">새 글 작성</a>
+    <table class="table table-hover" style="margin:20px">
+      <br/>
+        <thead>
+        <tr>
+          <th scope="row">Title.</th>
+          <td>Content</td>
+          <td>Date</td>
+        </tr>
+        {% for post in posts %}
+        <tr>
+            <td scope="row">{{ post.title }}</td>
+            <td>{{ post.content }}</td>
+            <td>{{ post.date }}</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+
+    </table>
+  </body>
+</html>
