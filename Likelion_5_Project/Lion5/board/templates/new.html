@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>NEW</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -14,7 +14,7 @@
     />
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Likelion5</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Likelion5</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Board </a>
+              <a class="nav-link active" href="">Board </a>
             </li>
           </ul>
           <form class="d-flex">
@@ -48,7 +48,12 @@
     </nav>
   </head>
   <body>
-    <form style="margin: 20px" action="{% url 'create' %}" method="POST">
+    <form
+      style="margin: 20px"
+      action="{% url 'create' %}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
       {% csrf_token %}
       <fieldset>
         <div class="form-group">
@@ -70,6 +75,7 @@
           ></textarea>
         </div>
         <br />
+        <input type="file" name="photo" />
         <button type="submit" class="btn btn-primary">Submit</button>
       </fieldset>
     </form>

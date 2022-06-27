@@ -54,15 +54,21 @@
       <br/>
         <thead>
         <tr>
-          <th scope="row">Title.</th>
+          <th scope="row">No</th>
+          
+          <td>Title</td>
           <td>Content</td>
           <td>Date</td>
         </tr>
         {% for post in posts %}
         <tr>
-            <td scope="row">{{ post.title }}</td>
+            
+            <th scope="row">{{ post.id }}</td>
+            <td><a href = "{% url 'detail' post.id %}">{{ post.title }}</a></td>
             <td>{{ post.content }}</td>
             <td>{{ post.date }}</td>
+            
+
           </tr>
         {% endfor %}
     </tbody>
