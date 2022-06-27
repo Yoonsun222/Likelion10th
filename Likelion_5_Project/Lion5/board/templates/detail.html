@@ -12,25 +12,25 @@
       type="text/css"
       href="{% static 'css/bootstrap.min.css' %}"
     />
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="">Likelion5</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Likelion5</a>
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#navbarColor02"
-          aria-controls="navbarColor02"
+          data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarColor02">
+        <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="">Board </a>
+              <a class="nav-link active" href="{% url 'home' %}">게시판 </a>
             </li>
           </ul>
           <form class="d-flex">
@@ -49,13 +49,21 @@
   </head>
   <body>
     <form style="margin: 20px">
-      <br />
-      <h2>{{ board_detail.title }}</h2>
-      <br />
-      {% if board_detail.photo %}
-      <img src="{{ board_detail.photo.url}}" alt="" height="300" />
-      {% endif %}
-      <p>{{ board_detail.content }}</p>
+      <div class="card mb-3">
+        <h4 class="card-header">
+          <div class="card-body">{{ board_detail.title }}</div>
+        </h4>
+
+        {% if board_detail.photo %}
+        <div style="height: 200px">
+          <img src="{{ board_detail.photo.url}}" alt="" style="height: 100%" />
+        </div>
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">{{ board_detail.content }}</p>
+        </div>
+        <div class="card-footer text-muted">{{ board_detail.date }}</div>
+      </div>
     </form>
   </body>
 </html>
