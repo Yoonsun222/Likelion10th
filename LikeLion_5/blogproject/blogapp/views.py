@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Blog
 from django.utils import timezone
 from .forms import BlogForm, BlogModelForm
@@ -50,9 +50,9 @@ def formcreate(request):
     return render(request, 'form_create.html', {'form':form})
 
 def modelformcreate(request):
-    if request.method == 'POST':
+    if request.method == 'POST' or request.method == 'FILES':
         #입력 내용 DB에 저장
-        form = BlogModelForm(request.POST)
+        form = BlogModelForm(request.POST, request.FILES)
         if form.is_valid():
             #저장해라
             form.save()
@@ -64,3 +64,11 @@ def modelformcreate(request):
     #세번째 인자로 views.pyㅐ의 데이터를 html에 넘겨줄 수 있는데 단, 딕셔너리 자료형으로 넘겨주어야한다.
     return render(request, 'form_create.html', {'form':form})
     
+
+
+#pk값을 이용해 특정 모델 객체 하나만 갖고오는 코드 : get_object_or_404(모델, 어떤 객체를 가져 오는지)
+def detail(request, blog_id):
+    #blog_id 번째 블로그 글을 데이터베이스로부터 갖고 와서 
+    blog_detail = get_object_or_404(Blog, pk=blog_id)    
+    #blog_id 번째 블로그 글을 detail.html로 띄워주는 코드
+    return render(request, 'detail.html', {'blog_detail': blog_detail})
