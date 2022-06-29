@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 #로그인이 성공한다면 home으로 redirect해라 라는 것을 settings.py에서 세팅가능
+
 LOGIN_REDIRECT_URL = "/"
 
 # Application definition
