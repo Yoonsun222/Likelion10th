@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Likelion5</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/bootstrap.min.css' %}"
+    />
+  </head>
+  <body>
+    <style>
+      .btn-box {
+        width: 300px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .btn-box > p {
+        margin-bottom: 0;
+      }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Likelion6</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'home' %}">게시판 </a>
+            </li>
+          </ul>
+          <form class="d-flex btn-box">
+            {% if user.is_authenticated %}
+            <p>안녕하세요, {{ user.username }}님</p>
+            <div style="float: right">
+              <button type="submit" class="btn btn-secondary">
+                <a href="{% url 'logout' %}" style="color: white">로그아웃</a>
+              </button>
+            </div>
+            {% else %}
+            <p>아직 로그인이 되지 않았습니다.</p>
+            <div style="float: right">
+              <button type="submit" class="btn btn-secondary">
+                <a href="{% url 'login' %}" style="color: white">로그인</a>
+              </button>
+            </div>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </nav>
+    <form action="{% url 'login' %}" method="POST">
+      <div style="width: 500px; margin-left: 20px; margin-top: 20px">
+        <div class="form-group">
+          <label class="form-label mt-4">Login</label>
+          <div class="form-floating mb-3">
+            <input
+              name="username"
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+            />
+            <label for="floatingInput">username</label>
+          </div>
+          <div class="form-floating">
+            <input
+              name="password"
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
+        </div>
+        <br />
+        <div style="float: right">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

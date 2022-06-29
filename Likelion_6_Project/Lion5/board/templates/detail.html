@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/bootstrap.min.css' %}"
+    />
+  </head>
+  <body>
+    <style>
+      .btn-box {
+        width: 300px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .btn-box > p {
+        margin-bottom: 0;
+      }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Likelion6</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarColor01"
+          aria-controls="navbarColor01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'home' %}">게시판 </a>
+            </li>
+          </ul>
+          <form class="d-flex btn-box">
+            {% if user.is_authenticated %}
+            <p>안녕하세요, {{ user.username }}님</p>
+            <div style="float: right">
+              <button type="submit" class="btn btn-secondary">
+                <a href="{% url 'logout' %}" style="color: white">로그아웃</a>
+              </button>
+            </div>
+            {% else %}
+            <p>아직 로그인이 되지 않았습니다.</p>
+            <div style="float: right">
+              <button type="submit" class="btn btn-secondary">
+                <a href="{% url 'login' %}" style="color: white">로그인</a>
+              </button>
+            </div>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+    </nav>
+    <form style="margin: 20px">
+      <div class="card mb-3">
+        <h4 class="card-header">
+          <div class="card-body">{{ board_detail.title }}</div>
+        </h4>
+
+        {% if board_detail.photo %}
+        <div style="height: 200px">
+          <img src="{{ board_detail.photo.url}}" alt="" style="height: 100%" />
+        </div>
+        {% endif %}
+        <div class="card-body">
+          <p class="card-text">{{ board_detail.content }}</p>
+        </div>
+        <div class="card-footer text-muted">{{ board_detail.date }}</div>
+      </div>
+    </form>
+    <br />
+    <ol class="breadcrumb" style="margin: 20px">
+      <li class="breadcrumb-item active">Comment List</li>
+    </ol>
+    <form
+      method="POST"
+      action="{% url 'create_comment' board_detail.id %}"
+      style="margin: 20px"
+    >
+      {% csrf_token %}
+      <div class="form-group">
+        <textarea
+          name="comment"
+          class="form-control"
+          id="exampleTextarea"
+          rows="3"
+        ></textarea>
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <form style="margin: 20px">
+      <br />
+      {% for comment in board_detail.comment_set.all %}
+      <p>{{ comment }}</p>
+      <hr />
+      {% endfor %}
+    </form>
+  </body>
+</html>
