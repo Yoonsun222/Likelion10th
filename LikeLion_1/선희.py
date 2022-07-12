@@ -1,29 +1,27 @@
 from bs4 import BeautifulSoup
 import requests
 
-url = "https://movie.naver.com/movie/bi/mi/basic.naver?code=38444"
+url = "https://www.10000recipe.com/recipe/6971271"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, 'html.parser')
 
-review_number = int(input('보고싶은 리뷰의 개수를 작성하세요: '))
 
-ko_title = soup.select_one('h3.h_movie > a').get_text()  # 영화 title
-en_title = soup.select_one('strong.h_movie2').text.strip().replace('\t','').replace('\r','').replace('\n','')
+ko_title = soup.select_one('h3.ready_ingre3_tt > ul.case1 > li > a').get_text()  # 영화 title
 
-print(ko_title, en_title)
-
-print('\n')
-score = soup.findAll('span', 'st_on')[0].text
-a, b, score = score.split(" ")
-print('관람객 평점: ', score) # 영화 평점
-print('\n')
-
-summary = list(soup.findAll('p', 'con_tx'))
-print("줄거리: ", summary[0].text)
-print('\n')
-
-# 영화 리뷰
-reviews = soup.findAll('div', 'score_reple')
+print(ko_title)
+#
+# print('\n')
+# score = soup.findAll('span', 'st_on')[0].text
+# a, b, score = score.split(" ")
+# print('관람객 평점: ', score) # 영화 평점
+# print('\n')
+#
+# summary = list(soup.findAll('p', 'con_tx'))
+# print("줄거리: ", summary[0].text)
+# print('\n')
+#
+# # 영화 리뷰
+# reviews = soup.findAll('div', 'score_reple')
 
 # print('리뷰1: ', reviews[0].p.get_text().strip())
 # print('\n')
