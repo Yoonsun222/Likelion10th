@@ -1,7 +1,7 @@
 from tkinter import filedialog
 from xml.etree.ElementTree import Comment
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comments ,FreeComments,FreePost
 
 
 class PostForm(forms.ModelForm):
@@ -11,5 +11,18 @@ class PostForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comment
-        filedis = ['comment']
+        model = Comments
+        fields = ['comment']
+
+
+
+
+class FreePostForm(forms.ModelForm):
+    class Meta:
+        model = FreePost
+        fields = '__all__'
+
+class FreeCommentForm(forms.ModelForm):
+    class Meta:
+        model = FreeComments
+        fields = ['comment']
