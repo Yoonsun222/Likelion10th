@@ -99,11 +99,7 @@ WSGI_APPLICATION = 'movie_reviews.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgresql',
-        'USER': 'postgres',
-        'PASSWORD': 'ti2sl0525!',
-        'HOST': 'localhost',
-        'PORT': '5432'
+
     }
 }
 
