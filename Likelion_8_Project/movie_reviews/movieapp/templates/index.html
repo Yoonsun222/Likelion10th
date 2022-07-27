@@ -1,0 +1,20 @@
+{% for o in obj %}
+
+<a href="{% url 'detail' o.id %}"> 영화상세보기</a>
+
+{{o.orgin_title}}<br />
+{{o.title}}<br />
+
+<img src="https://www.themoviedb.org/t/p/w300/{{o.poster_path}}" /><br /><br />
+<img src="https://www.themoviedb.org/t/p/w300/{{o.backdrop_path}}" /><br />
+
+{{o.vote_average}}<br />
+{{o.overview}}<br />
+{{o.id}}<br />
+
+{% endfor %}
+
+<form action="" method="POST">
+  {% csrf_token %} {{ form }}
+  <input type="submit" value="submit" />
+</form>
